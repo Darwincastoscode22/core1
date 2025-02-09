@@ -17,10 +17,10 @@ class clientprofileController extends Controller
 
     $id=Auth::user()->code_id;
 
-  $profiles = DB::select("select  * FROM  core_client_account where  client_code='$id' ");
+  $profiles = DB::select("select  * FROM  core1_applicant where  applicant_code='$id' ");
 
       $pageConfigs = ['myLayout' => 'blank'];
-          return view('content.applicant.client-profile',['profiles' =>$profiles],['pageConfigs' => $pageConfigs]);
+          return view('content.applicant.applicant-profile',['profiles' =>$profiles],['pageConfigs' => $pageConfigs]);
 
         }
 
@@ -37,7 +37,7 @@ class clientprofileController extends Controller
             $get=$_FILES["image"]["name"];
 $id=$request->applicant_id;
 
-$app = signup::where('client_id',$id);
+$app = signup::where('applicant_id',$id);
         if(!$app){
                return abort(404);
              }
@@ -50,6 +50,27 @@ $app = signup::where('client_id',$id);
     return back();
        
     }
+
+
+        public function storefile(Request $request){
+
+
+
+        $file = $request->file('resume');
+
+        $fileName = time() . '_' . $file->getClientOriginalName();
+     $file-> move(public_path('assets\img'),$fileName);
+       
+
+$id=$request->applicant_id;
+  DB::select("update core1_applicant set resume='$fileName' where  applicant_id='$id'");
+        return redirect()->back()->with('message', 'File uploaded successfully.');
+    }
+  
+     
+
+       
+
 
 
     

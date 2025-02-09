@@ -41,12 +41,24 @@ public function loginpost(Request $request){
 
 
 
+if($user->role=='admin'){
   Auth::login($user);
+   return redirect('/dashboard/crm');
+}else{
+  Auth::login($user);
+   return redirect('/');
+   }
 
 
-  return redirect('/dashboard/crm');
+
+
+
+
 
 }
+
+
+
 }
 
 

@@ -8,7 +8,6 @@ use App\Http\Controllers\apps\Kanban;
 use App\Http\Controllers\apps\Email;
 use App\Http\Controllers\apps\Calendar;
 
-use App\Http\Controllers\timeandattendance;
 use App\Http\Controllers\language\LanguageController;
 use App\Http\Controllers\layouts\CollapsedMenu;
 use App\Http\Controllers\layouts\ContentNavbar;
@@ -157,7 +156,19 @@ use App\Http\Controllers\maps\Leaflet;
 
 
 Route::middleware('auth')->group(function(){
-Route::get('/placement/view', [App\Http\Controllers\placementController::class,'index'])->name('placement-view');
+
+
+
+	Route::get('/newhire/view', [App\Http\Controllers\newhireController::class,'index'])->name('newhire-view');
+
+
+
+	Route::get('/recruitment/view', [App\Http\Controllers\RecruitmentController::class,'index'])->name('recruitment-view');
+	Route::post('/recruitmentstore', [App\Http\Controllers\RecruitmentController::class,'store'])->name('store');
+
+	Route::post('/recruitment', [App\Http\Controllers\RecruitmentController::class,'Recruiteupdate'])->name('Recruiteupdate');
+
+Route::get('/placement/view', [App\Http\Controllers\placementController::class,'index'])->name('recruite-view');
 
 Route::get('/client/view', [App\Http\Controllers\clientmanagementController::class,'index'])->name('client-view');
 
@@ -165,47 +176,62 @@ Route::get('/applicant/view', [App\Http\Controllers\applicantController::class,'
 
 Route::post('/applicant', [App\Http\Controllers\placementController::class,'store'])->name('applicant.store');
 
+
 Route::post('/applicant.update', [App\Http\Controllers\placementController::class,'update'])->name('applicant.update');
 
+
+
+
 Route::get('/client/agreement', [App\Http\Controllers\clientcontractController::class,'index'])->name('client-agreement');
-
-
-
 
 
 
 Route::get('/app/chat', [Chat::class, 'index'])->name('app-chat');
 Route::post('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout');
 Route::get('/app/calendar', [Calendar::class, 'index'])->name('app-calendar');
-Route::post('/claims', [App\Http\Controllers\ClaimController::class, 'store'])->name('claims.store');
+
 
 Route::get('/user/account', [App\Http\Controllers\UseraccountController::class, 'index'])->name('user-account');
 
 Route::post('/user_account', [App\Http\Controllers\UseraccountController::class,'store'])->name('user_account.store');
 
+Route::get('/applicant-profile', [App\Http\Controllers\clientprofileController::class,'index'])->name('applicant-profile');
 
-
-Route::get('/client', [App\Http\Controllers\clientprofileController::class,'index'])->name('client-profile');
 Route::post('/jobportal.storeImage', [App\Http\Controllers\clientprofileController::class,'storeImage'])->name('jobportal.storeImage');
 
-Route::post('/client.update', [App\Http\Controllers\clientprofileController::class,'update'])->name('client.update');
+Route::post('/resume.storefile', [App\Http\Controllers\clientprofileController::class,'storefile'])->name('resume.storefile');
 
 
+
+Route::post('/applying', [App\Http\Controllers\jobdescriptionController::class,'apply'])->name('applying.apply');
+
+
+
+Route::post('/deleted', [App\Http\Controllers\UseraccountController::class,'destroy'])->name('destroy');
+
+
+Route::post('/updateuser', [App\Http\Controllers\UseraccountController::class,'update'])->name('update');
 
 
 });
 
 
+Route::get('/pages/profile-user',[UserProfile::class, 'index'])->name('pages-profile-user');
+Route::post('/storeImage',[UserProfile::class,'storeImage'])->name('storeImage');
+Route::post('/userupdate', [UserProfile::class,'update'])->name('userupdate');
+
+
+
 Route::get('/contact', [App\Http\Controllers\contactController::class,'index'])->name('index');
 Route::get('/about', [App\Http\Controllers\aboutController::class,'index'])->name('index');
 
-
+Route::get('/jobdescription', [App\Http\Controllers\jobdescriptionController::class,'index'])->name('index');
 
 
 // Main Page Route
-Route::post('/login', [App\Http\Controllers\Homecontroller::class, 'login'])->name('login');
+Route::post('/login', [App\Http\Controllers\homeController::class, 'login'])->name('login');
 
-Route::get('/', [App\Http\Controllers\Homecontroller::class, 'index'])->name('home-view');
+Route::get('/', [App\Http\Controllers\homeController::class, 'index'])->name('home-view');
 
 Route::get('/signup', [App\Http\Controllers\signupController::class, 'index'])->name('signup-view');
 Route::post('/signup.store', [App\Http\Controllers\signupController::class, 'store'])->name('signup.store');
@@ -219,7 +245,10 @@ Route::post('/', [LoginBasic::class,'loginpost'])->name('auth-login-basic');
 Route::get('/auth/logi/basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
 
 Route::get('/auth/logi/basic', [LoginBasic::class, 'index'])->name('auth-login-basic');
+
 Route::get('/dashboard/crm', [Crm::class, 'index'])->name('dashboard-crm');
+
+
 // locale
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
@@ -253,7 +282,6 @@ Route::get('/front-pages/help-center-article', [HelpCenterArticle::class, 'index
 Route::get('/app/email', [Email::class, 'index'])->name('app-email');
 
 
-Route::get('/time/and/attendance', [timeandattendance::class,'index'])->name('time-and-attendance');
 
 
 
@@ -305,7 +333,10 @@ Route::get('/app/user/view/connections', [UserViewConnections::class, 'index'])-
 Route::get('/app/access-permission', [AccessPermission::class, 'index'])->name('app-access-permission');
 
 // pages
-Route::get('/pages/profile-user', [UserProfile::class, 'index'])->name('pages-profile-user');
+
+
+
+
 Route::get('/pages/profile-teams', [UserTeams::class, 'index'])->name('pages-profile-teams');
 Route::get('/pages/profile-projects', [UserProjects::class, 'index'])->name('pages-profile-projects');
 Route::get('/pages/profile-connections', [UserConnections::class, 'index'])->name('pages-profile-connections');

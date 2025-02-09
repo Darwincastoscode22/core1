@@ -3,7 +3,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 @extends('layouts/layoutMaster')
-@section('title', 'Payroll')
+@section('title', 'Recruitement')
 @section('vendor-style')
 @vite('resources/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.scss')
 @endsection
@@ -23,7 +23,7 @@
 <div class="card">
   <div class="card">
     <div style="display:flex;">
-     <button class="btn  btn-primary btn-sm btn-flat m-3 " style="font-size:15px;width:15%;height:38px;" id="open_modal"><i class="fas fa-plus-square"></i>Create Jobroles</button>
+     <button class="btn  btn-primary btn-sm btn-flat m-3 " style="font-size:15px;width:15%;height:38px;" id="open_modal"><i class="fas fa-plus-square"></i>Create</button>
 
      <form class=" mt-3 ml-3 mw-100 navbar-search"  style="margin-left:7px" autocomplete="off">
       <div class="input-group">
@@ -43,8 +43,11 @@
         <tr>
          <th>JOB ROLES NEEDED</th>
          <th>DEPARTMENT</th>
+          <th>JOB QUALIFICATION</th>
+            <th>SALARY</th>
+            <th>JOB NATURE</th>
          <th>STATUS</th>
-         <th>DATE REQUEST</th>
+         <th>DATE CREATE</th>
          <th>ACTION</th>
        </tr>
      </thead>
@@ -54,22 +57,33 @@
        <td style="display:none;">{{ $row->recruitment_id }}</td>
        <td class="titles">{{ $row->jobrole }}</td>
        <td>{{ $row->department}}</td>
+      <td>{{ $row->description}}</td>
+      <td>{{ $row->salary}}</td>
+       <td>{{ $row->job_nature}}</td>
        <td><span class="badge bg-danger">{{ $row->status}}</span></td>
        <td>{{ $row->created_at}}</td>
-       <td style="display:flex;">
+<td >
+ 
+
         <?php $check=$row->status;
-        if(empty($check)){?>
+        if($check=='Pending'){?>
+            <div style="display:flex;">
           <form method="POST" action="{{route('Recruiteupdate')}}" class="p-0 m-0">
             @csrf
             @method('POST')
             <input type="type" name="recruitment_id_insert"  value="{{$row->recruitment_id}}" style="display:none;">
-            <input type="type" name="status_insert"  value="pending" style="display:none;">
-            <button type="submit" name="submit" class=" btn btn-primary btn-sm  btn-flat m-0" id="update_btn">REQUEST</button>
-          </form>     
-        <?php  }else{?>
-        <?php  }?>
-        <button class=" btn btn-primary btn-sm  btn-flat " id="update_recruitment" style="
-    margin-left: 5px;">UPDATE</button></td>
+            <input type="type" name="status_insert"  value="Post" style="display:none;">
+            <button type="submit" name="submit" class=" btn btn-primary btn-sm  btn-flat m-0" id="update_btn">Post</button>
+
+          </form> 
+             <button class=" btn btn-primary btn-sm  btn-flat " id="update_recruitment" style="
+    margin-left: 5px;">UPDATE</button>    
+        </div>
+        <?php  }?> 
+
+</td>
+
+     
       </tr>
       @endforeach
     </tbody>
@@ -80,11 +94,11 @@
 
 <div class="modal" tabindex="-1" role="dialog" id="recruitement_modal">
   <div class="modal-dialog" role="document">
-    <form  action="{{url('/recruitment')}}" id="formAuthentication" class="mb-3" method="POST">
+    <form  action="{{url('/recruitmentstore')}}" id="formAuthentication" class="mb-3" method="POST">
       @csrf
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">REQUEST JOB ROLES</h5>
+          <h5 class="modal-title">JOB POSTING</h5>
         </div>
         <div class="modal-body">
           <div class="form-group">
@@ -97,9 +111,36 @@
               <option>Logistic Department</option>
             </select>
           </div>
+
+              <div class="form-group">
+            <label>Job Qualification</label>
+           <textarea class="form-control" name="desccription"></textarea>
+          </div>
+
+
+            <div class="form-group">
+            <label>Schedule</label>
+            <input  type="text" class="form-control" placeholder="7:00 am to 6:00pm" >
+          </div>
+
+     
+            <div class="form-group">
+            <label>Salary rate</label>
+            <input  type="number" class="form-control" name="salaryrate">
+          </div>
+
+      <div class="form-group">
+            <label>Job Nature</label>
+           <select class= "form-control" name="jobnature">
+             <option>Fulltime</option>
+             <option>Partime</option>
+           </select>
+          </div>
+
+
           <input type="text"  value="pending" style="display:none;" name="status">
           <div class="modal-footer">
-            <button type="SUBMIT" class="btn btn-primary">Save changes</button>
+            <button type="SUBMIT" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-danger" id="modal_close">Close</button>
           </div>
         </div>
@@ -122,6 +163,8 @@
               <input  type="text" class="form-control" name="recruitment_id_update" id="recruitment_id_update" style="display:none;">
             <input  type="text" class="form-control" name="jobrole_update" id="jobrole_update">
           </div>
+
+
           <div class="form-group">
             <label>Department</label>
             <select class="form-control" name="department_update" id="department_update">

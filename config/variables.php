@@ -3,7 +3,7 @@
 return [
  
   "creatorUrl" => "",
-  "templateName" => "CORE",
+  "templateName" => "CORE1",
   "templateSuffix" => "SYSTEM",
   "templateVersion" => "1.0.0",
   "templateFree" => false,

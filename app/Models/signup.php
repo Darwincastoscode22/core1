@@ -8,20 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class signup extends Model
 {
     use HasFactory;
-    protected $table="core_client_account";
+    protected $table="core1_applicant";
 
   protected $fillable=[
-    'client_id',
-    'firstname',
+    'applicant_id',
+  'firstname',
     'lastname',
     'middlename',
-    'contact',
-    'company_address',
+    'civil_status',
+    'address',
     'email',
     'contact',
+    'age',
+    'resume',
+    'image',
     'status',
-     'company',
-       'client_code',
-       'image',
-];
+    'gender',
+    'applicant_code',
+    'position',];
 }

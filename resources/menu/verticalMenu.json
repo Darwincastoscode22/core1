@@ -12,34 +12,47 @@
     },
     
     {
-      "url": "placement/view",
-      "name": "Placement Management",
+      "url": "recruitment/view",
+      "name": "Recruitement",
       "icon": "menu-icon tf-icons ti ti-file",
-      "slug": "placement-view"
+      "slug": "recruitment-view"
     },
     {
-      "url": "compensation/view",
-      "name": "Position Job Management",
+      "url": "newhire/view",
+      "name": "New hire on board",
       "icon": "menu-icon tf-icons ti ti-wallet",
-      "slug": "compensation-view"
+      "slug": "newhire-view"
     },
       {
       "url": "user/account",
-      "name": "Payment & Payroll Management",
+      "name": "Employee Management",
       "icon": "menu-icon tf-icons ti ti-user ",
       "slug": "user-account"
     },
       {
-      "url": "client/view",
-      "name": "Client Management",
+      "url": "applicant/view",
+      "name": "Applicant Management",
       "icon": "menu-icon tf-icons ti ti-user ",
-      "slug": "user-account"
+      "slug": "applicant-view"
     },
       {
       "url": "client/agreement",
-      "name": "Client Agreement & Contract",
+      "name": "Recruiting Analytics",
       "icon": "menu-icon tf-icons ti ti-user ",
       "slug": "client-agreement"
+    },
+      {
+      "url": "client/agreement",
+      "name": "Reporting",
+      "icon": "menu-icon tf-icons ti ti-user ",
+      "slug": "client-agreement"
+    }
+
+    ,{
+      "url": "user/account",
+      "name": "User Account",
+      "icon": "menu-icon tf-icons ti ti-user ",
+      "slug": "user-account"
     }
 
 

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Recruite;
+
 
 
 class RecruitmentController extends Controller
@@ -15,17 +15,18 @@ class RecruitmentController extends Controller
        return view('content.recruitment.recruitment-view',['Recruite' => $Recruite]);
    }
 
-
-
     public function store(Request $request){
         // dd($request->all());
         Recruite::create([
             'jobrole' => $request->jobrole,
-            'department' => $request->department,]);
+            'department' => $request->department,
+            'description' => $request->desccription,
+            'job_nature' => $request->jobnature,
+            'salary' => $request->salaryrate,
+            'status' =>'Pending',]);
+   
             return back();
     }
-
-
 
 public function Recruiteupdate(Request $request){
 $id=$request->recruitment_id_insert;
@@ -39,8 +40,6 @@ $id=$request->recruitment_id_insert;
     return back();
     }
 
-
-
 public function update_request(Request $request){
 $id=$request->recruitment_id_update;
  $Recruite_updates = Recruite::where('recruitment_id',$id);
@@ -52,8 +51,6 @@ $id=$request->recruitment_id_update;
                  'department' => $request->department_update,]);
     return back();
     }
-
-
 
 }
 

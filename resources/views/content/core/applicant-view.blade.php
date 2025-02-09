@@ -5,7 +5,7 @@
 
 
 @extends('layouts/layoutMaster')
-@section('title', 'CLIENT MANAGMENTytre1')
+@section('title', 'APPLICANT MANAGEMENT')
 @section('vendor-style')
 @vite('resources/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.scss')
 @endsection
@@ -25,8 +25,6 @@
     <div class="card">
 
           <div style="display:flex;margin-bottom:3%;">
-      <button class="btn  btn-primary btn-sm btn-flat mt-3 " style="margin-left:7px;font-size:15px;width:13%;height:38px;"  id="openmodels"><i class="fas fa-plus-square"></i>Insert Info</button>
-
       <form class=" mt-3 ml-3 mw-100 navbar-search"  style="margin-left:7px" autocomplete="off">
         <div class="input-group">
           <input type="text"  id="myInput" onkeyup="myFunction()" class="form-control bg-light border-1 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" >
@@ -42,14 +40,45 @@
       <div class="card-datatable table-responsive">
         <table class="datatables-projects table border-top">
           <thead>
-    <tr>
+        <tr>
          <th>Applicant Name</th>
          <th>Postion</th>
          <th>Contact Number</th>
-         <th>email</th>
-         <th>Applicant Code</th>
+         <th>Email</th>
+         <th>Date Apply</th>
+         <th>Salary</th>
+           <th>Resume</th>
+                   <th>Job Nature</th>
+        <th>Status</th>
+          <th>Action</th>
        </tr>
           </thead>
+   <tbody>
+      @foreach($applicant as $row)
+      <tr class="contents">
+       <td>{{$row->firstname}} {{ $row->lastname}}</td>
+       <td class="titles">{{ $row->jobrole}}</td>
+          <td>{{$row->contact}}</td>
+       <td>{{$row->email}}</td>
+      <td>{{$row->created_at}}</td>
+      <td>{{$row->salary}}</td>
+       <td><button class="btn  btn-primary"><a href="http://127.0.0.1:8000/assets/img/<?php echo $row->resume;?>" style="color:white;">Download</a></button></td>
+       <td>{{ $row->job_nature}}</td>
+       <td><span class="text-success">{{$row->applystatus}}</span></td>
+       <td></td>
+<td >
+ 
+
+       
+
+</td>
+
+     
+      </tr>
+      @endforeach
+    </tbody>
+
+
         </table>
       </div>
     </div>

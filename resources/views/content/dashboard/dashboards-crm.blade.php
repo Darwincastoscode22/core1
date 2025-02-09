@@ -85,7 +85,7 @@
     <div class="card">
       <div class="card-body bg-success">
         <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="fas fa-user-tie ti-md"></i></div>
-        <h5 class="card-title mb-1 pt-2 text-white">Present Today</h5>
+        <h5 class="card-title mb-1 pt-2 text-white">Total Applicant</h5>
         <p class="mb-2 mt-1 text-white">50</p>
         <div class="pt-1">
         </div>

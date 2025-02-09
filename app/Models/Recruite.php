@@ -9,13 +9,14 @@ class Recruite extends Model
 {
     use HasFactory;
 
-         protected $table="hr4_recruitment";
+         protected $table="core1_recruitment";
       protected $fillable = [
         'recruitment_id',
         'jobrole',
         'department',
         'status',
         'description',
-        
+        'salary',
+         'job_nature',
     ];
 }

@@ -16,29 +16,31 @@ class signupController extends Controller
         }
 
 public function store(Request $request){
-        // dd($request->all());
-   $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
    $random =substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
         signup::create([
-            'client_code' => $random,
+            'applicant_code' =>$random,
             'firstname' => $request->first,
             'middlename' => $request->middle,
             'lastname' => $request->last,
             'address' => $request->address,
             'contact' => $request->contact,
             'email' => $request->email,
-            'company' => $request->company,
-            'company_address' => $request->address,
+            'civil_status' => $request->civil_status,
+                  'age' => $request->age,
+            'gender' => $request->gender,
         ]);
-        $gg=$request->first;
+$gg=$request->first;
           User::create([
             'name' =>$request->first,
             'code_id' =>$random,
             'password' => $request->password,
             'email' => $request->email,
-             'role'=>'client',
+             'role'=>'applicant',
         ]);
-          return redirect()->back()->with('alert', 'SUCCESS REGISTER');
+          return back();
+  
     }
 
 }

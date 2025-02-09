@@ -14,11 +14,10 @@ class homeController extends Controller
   {
      
 
-  $post = DB::select("select  * FROM core1_employee where  status='post'");
-
+      $job = DB::select("SELECT * FROM `core1_recruitment` where status='Post'");
 
       $pageConfigs = ['myLayout' => 'blank'];
-          return view('content.applicant.home-view',['pageConfigs' => $pageConfigs],['post' => $post]);
+          return view('content.applicant.home-view',['job'=>$job],['pageConfigs' => $pageConfigs]);
 
         }
 
@@ -48,6 +47,7 @@ public function login(Request $request){
 if($user->role=='admin'){
   Auth::login($user);
   return redirect('/dashboard/crm');
+  //dd("asasa");
 }else{
   Auth::login($user);
    return redirect('/');
