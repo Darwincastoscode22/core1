@@ -26,8 +26,15 @@ class jobdescriptionController extends Controller
      applicant_apply::create([
             'applicant_id' =>$id,
             'recruitment_id' =>$request->recruitment_id,
-            'status' =>'Apply',
+            'status' =>'Pending',
       
         ]);
+      $id=$request->recruitment_id;
+
+    $jobdesc = DB::select("SELECT * FROM `core1_recruitment`  where recruitment_id='$id'");
+
+    $pageConfigs = ['myLayout' => 'blank'];
+         return view('content.applicant.jobdescription-view',['pageConfigs' => $pageConfigs],['jobdesc' => $jobdesc]);
+
    }
 }

@@ -72,7 +72,7 @@
             @csrf
             @method('POST')
             <input type="type" name="recruitment_id_insert"  value="{{$row->recruitment_id}}" style="display:none;">
-            <input type="type" name="status_insert"  value="Post" style="display:none;">
+            <input type="type" name="status_insert"  value="Posted" style="display:none;">
             <button type="submit" name="submit" class=" btn btn-primary btn-sm  btn-flat m-0" id="update_btn">Post</button>
 
           </form> 

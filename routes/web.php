@@ -158,8 +158,28 @@ use App\Http\Controllers\maps\Leaflet;
 Route::middleware('auth')->group(function(){
 
 
+Route::get('/applicant/exam', [App\Http\Controllers\examController::class,'index'])->name('applicant-exam');
+Route::post('/exams', [App\Http\Controllers\examController::class,'storeexam'])->name('storeexam');
 
+Route::get('/schedule/view', [App\Http\Controllers\scheduleexamController::class,'index'])->name('schedule-view');
+
+Route::post('/scheduleview', [App\Http\Controllers\scheduleexamController::class,'storeschedule'])->name('storeschedule');
+
+Route::get('/employee/view', [App\Http\Controllers\employeeController::class,'index'])->name('employee-view');
+
+
+   Route::post('/deployed', [App\Http\Controllers\newhireController::class, 'deploy'])->name('deploy');
 	Route::get('/newhire/view', [App\Http\Controllers\newhireController::class,'index'])->name('newhire-view');
+	
+
+	Route::get('/interview/view', [App\Http\Controllers\interviewController::class,'index'])->name('interview-view');
+	Route::post('/interview', [App\Http\Controllers\interviewController::class,'storeinterview'])->name('storeinterview');
+
+	Route::post('/passed', [App\Http\Controllers\interviewController::class,'interviewpassed'])->name('interviewpassed');
+	Route::post('/interviewfail', [App\Http\Controllers\interviewController::class,'interviewfailed'])->name('interviewfailed');
+
+
+
 
 
 
@@ -174,44 +194,33 @@ Route::get('/client/view', [App\Http\Controllers\clientmanagementController::cla
 
 Route::get('/applicant/view', [App\Http\Controllers\applicantController::class,'index'])->name('applicant-view');
 
-Route::post('/applicant', [App\Http\Controllers\placementController::class,'store'])->name('applicant.store');
 
+///applicant status
+
+Route::post('/applicant', [App\Http\Controllers\placementController::class,'store'])->name('applicant.store');
+Route::post('/applicant.reject',[App\Http\Controllers\applicantController::class,'reject'])->name('applicant.reject');
+Route::post('/applicant.approved',[App\Http\Controllers\applicantController::class,'approved'])->name('applicant.approved');
+Route::post('/applicant.hired',[App\Http\Controllers\applicantController::class,'hired'])->name('applicant.hired');
 
 Route::post('/applicant.update', [App\Http\Controllers\placementController::class,'update'])->name('applicant.update');
 
 
-
-
 Route::get('/client/agreement', [App\Http\Controllers\clientcontractController::class,'index'])->name('client-agreement');
-
-
-
 Route::get('/app/chat', [Chat::class, 'index'])->name('app-chat');
 Route::post('/logout', [App\Http\Controllers\LogoutController::class, 'logout'])->name('logout');
 Route::get('/app/calendar', [Calendar::class, 'index'])->name('app-calendar');
-
-
 Route::get('/user/account', [App\Http\Controllers\UseraccountController::class, 'index'])->name('user-account');
-
 Route::post('/user_account', [App\Http\Controllers\UseraccountController::class,'store'])->name('user_account.store');
-
 Route::get('/applicant-profile', [App\Http\Controllers\clientprofileController::class,'index'])->name('applicant-profile');
-
 Route::post('/jobportal.storeImage', [App\Http\Controllers\clientprofileController::class,'storeImage'])->name('jobportal.storeImage');
-
 Route::post('/resume.storefile', [App\Http\Controllers\clientprofileController::class,'storefile'])->name('resume.storefile');
-
-
-
 Route::post('/applying', [App\Http\Controllers\jobdescriptionController::class,'apply'])->name('applying.apply');
-
-
-
 Route::post('/deleted', [App\Http\Controllers\UseraccountController::class,'destroy'])->name('destroy');
-
-
 Route::post('/updateuser', [App\Http\Controllers\UseraccountController::class,'update'])->name('update');
 
+Route::get('/reporting/view', [App\Http\Controllers\reportingController::class,'index'])->name('index');
+
+Route::get('/analytics/view', [App\Http\Controllers\analytic::class, 'index'])->name('index');
 
 });
 
@@ -261,7 +270,8 @@ Route::get('/layouts/content-nav-sidebar', [ContentNavSidebar::class, 'index'])-
 Route::get('/layouts/navbar-full', [NavbarFull::class, 'index'])->name('layouts-navbar-full');
 Route::get('/layouts/navbar-full-sidebar', [NavbarFullSidebar::class, 'index'])->name('layouts-navbar-full-sidebar');
 Route::get('/layouts/horizontal', [Horizontal::class, 'index'])->name('dashboard-analytics');
-Route::get('/layouts/vertical', [Vertical::class, 'index'])->name('dashboard-analytics');
+Route::get('/layouts/vertical', [Vertical::class, 'index'])->name('dashboard-analytics')
+;
 Route::get('/layouts/without-menu', [WithoutMenu::class, 'index'])->name('layouts-without-menu');
 Route::get('/layouts/without-navbar', [WithoutNavbar::class, 'index'])->name('layouts-without-navbar');
 Route::get('/layouts/fluid', [Fluid::class, 'index'])->name('layouts-fluid');

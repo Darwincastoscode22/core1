@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 class homeController extends Controller
 {
-     public function index()
-  {
-     
+ public function index()
+ {
+   
 
-      $job = DB::select("SELECT * FROM `core1_recruitment` where status='Post'");
+  $job = DB::select("SELECT * FROM `core1_recruitment` where status='Posted'");
 
-      $pageConfigs = ['myLayout' => 'blank'];
-          return view('content.applicant.home-view',['job'=>$job],['pageConfigs' => $pageConfigs]);
+  $pageConfigs = ['myLayout' => 'blank'];
+  return view('content.applicant.home-view',['job'=>$job],['pageConfigs' => $pageConfigs]);
 
-        }
+}
 
 
 
@@ -44,15 +44,15 @@ public function login(Request $request){
   }
 
 
-if($user->role=='admin'){
-  Auth::login($user);
-  return redirect('/dashboard/crm');
+  if($user->role=='admin'){
+    Auth::login($user);
+    return redirect('/dashboard/crm');
   //dd("asasa");
-}else{
-  Auth::login($user);
-   return redirect('/');
-   }
- }
+  }else{
+    Auth::login($user);
+    return redirect('/');
+  }
+}
 
 
 }

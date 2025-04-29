@@ -59,7 +59,6 @@
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
                                             <li><a href="{{url('/')}}">Home</a></li>
-                                            <li><a href="#findjob">Find a Jobs </a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                         </ul>
@@ -391,4 +390,13 @@
  });
 
 
+</script>
+
+
+<script>
+  var msg = '{{Session::get('alert')}}';
+  var exist = '{{Session::has('alert')}}';
+  if(exist){
+    alert(msg);
+  }
 </script>

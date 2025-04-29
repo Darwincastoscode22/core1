@@ -149,7 +149,7 @@
           <label>USER ROLE</label>
    <div class="form-group">
    <select class="form-control" name="role">
-     <option>Admin</option>
+     <option>admin</option>
        <option>Hr Staff</option>
    </select>
    </div>
@@ -194,13 +194,13 @@
    <div class="form-group">
    <select class="form-control" name="roleupdate" id="roleupdate">
           <option>Hr Staff</option>
-     <option>Admin</option>
+     <option>admin</option>
  
    </select>
    </div>
 
 
-            <label>STATUS</label>
+    <label>STATUS</label>
    <div class="form-group">
    <select class="form-control" name="statusupdate" id="statusupdate">
      <option>Inactive</option>
@@ -258,22 +258,24 @@
 <script type="text/javascript">
 
 
-  
 
-      $('#myInput').keyup(function(){
+$('#myInput').keyup(function(){
 // Search text
       var text = $(this).val();
 // Hide all content class element
       $('.contents').hide();
-
 // Search 
       $('.contents .titles:contains("'+text+'")').closest('.contents').show();
     });
-
-
-
 </script>
 
 
 
 
+<script>
+  var msg = '{{Session::get('alert')}}';
+  var exist = '{{Session::has('alert')}}';
+  if(exist){
+    alert(msg);
+  }
+</script>

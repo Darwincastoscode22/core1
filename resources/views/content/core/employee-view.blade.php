@@ -3,6 +3,7 @@
 
 @extends('layouts/layoutMaster')
 @section('title', 'New hire')
+
 @section('vendor-style')
 @vite([
 'resources/assets/vendor/libs/fullcalendar/fullcalendar.scss',
@@ -12,9 +13,11 @@
 'resources/assets/vendor/libs/@form-validation/form-validation.scss',
 ])
 @endsection
+
 @section('page-style')
 @vite(['resources/assets/vendor/scss/pages/app-calendar.scss'])
 @endsection
+
 @section('vendor-script')
 @vite([
 'resources/assets/vendor/libs/fullcalendar/fullcalendar.js',
@@ -57,11 +60,11 @@
                     </tr>
                 </thead>
                 <tbody id="hiresTableBody">
-                    @foreach($newEmployees as $employee)
+                    @foreach($employee as $employee)
                     <tr>
-                        <td>{{ $employee->appid }}</td>
+                        <td>{{ $employee->applicant_code}}</td>
                         <td>{{ $employee->firstname}} {{ $employee->lastname}}</td>
-                        <td>{{ $employee->dep}}</td>
+                        <td>{{ $employee->department}}</td>
                         <td>{{ $employee->jobrole }}</td>
                         <td>{{ $employee->date_hired }}</td>
                         <td> <span class="badge bg-success">{{ $employee->applicant_status }}</span></td>
@@ -74,33 +77,11 @@
                         <td style="display:none;">{{ $employee->email }}</td>
                         <td style="display:none;">{{ $employee->contact }}</td>
                         <td>   
-                            <div class="dropdown">
-                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                  <i class="ti ti-dots-vertical"></i>
-                              </button>
-                              <div class="dropdown-menu">
-                                  <form method="POST"  action="{{url('deployed')}}">
-                                      @csrf
-                                      @method('POST')
-                                      <a class="dropdown-item">
-                                        <input type="text" name="deployed"  value="{{ $employee->applicant_apply_id}}" style="display:none;">
-                                        <button type="submit"  name="submit" class="btn  btn-danger btn-sm btn-flat mb-3" style="font-size:15px;">
-                                          <i class="fa-solid fa-check-double"></i>
-                                      </button>
-                                    Qualified
-                                  </a>
-                              </form>
-                              <a class="dropdown-item">
-                              
+                          
                                 <button type="button"  id="viewmodal" class="btn  btn-warning btn-sm btn-flat mb-3" style="font-size:15px;">
-                                  <i class="fa-solid fa-eye"  id="viewmodal"></i>
+                                  <i class="fa-solid fa-eye"  id="viewmodal">View</i>
                               </button>
-                              View
-                          </a>
-
-
-                      </div>
-                  </div>
+                             
               </td>
           </tr>
           @endforeach
@@ -117,7 +98,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
         
-                <h5 style="text-align:center;margin-top:3%;" id="reviewModalLabel">Employee Information<span id="reviewEmployeeName"></span></h5>
+                <h5 style="text-align:center;margin-top:3%;" id="reviewModalLabel">Employee Management<span id="reviewEmployeeName"></span></h5>
          
             <div class="modal-body">
 

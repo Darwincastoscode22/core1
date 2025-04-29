@@ -59,6 +59,16 @@
 @section('content')
 
 
+ <?php
+$host="localhost"; // Host name 
+$username="root"; // Mysql username 
+$password=""; // Mysql password 
+$db_name="coredb"; // Database name 
+$tbl_name="information"; // Table name 
+$conn = mysqli_connect("$host","$username","$password")or die("cannot connect"); 
+mysqli_select_db($conn,"$db_name")or die("cannot select DB");
+?>
+
      <div class="container-xxl flex-grow-1 container-p-y ">
 
 
@@ -74,7 +84,14 @@
       <div class="card-body">
         <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="fas fa-user-tie ti-md"></i></div>
         <h5 class="card-title mb-1 pt-2 text-white">Total Employee</h5>
-        <p class="mb-2 mt-1 text-white">100</p>
+        <p class="mb-2 mt-1 text-white">
+          <?php
+$applicants="select count(*) as total from core2_contract where status='Hired' ";
+$applicantquerys=mysqli_query($conn,$applicants);
+$applicantrows=mysqli_fetch_assoc($applicantquerys);
+echo $applicantrows['total'];
+?>
+  </p>
         <div class="pt-1">
         </div>
       </div>
@@ -86,7 +103,12 @@
       <div class="card-body bg-success">
         <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="fas fa-user-tie ti-md"></i></div>
         <h5 class="card-title mb-1 pt-2 text-white">Total Applicant</h5>
-        <p class="mb-2 mt-1 text-white">50</p>
+        <p class="mb-2 mt-1 text-white"><?php
+$applicant="select count(*) as total from core1_applicant_apply where status='Pending' ";
+$applicantquery=mysqli_query($conn,$applicant);
+$applicantrow=mysqli_fetch_assoc($applicantquery);
+echo $applicantrow['total'];
+?></p>
         <div class="pt-1">
         </div>
       </div>
@@ -98,8 +120,13 @@
     <div class="card">
       <div class="card-body  bg-danger">
         <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="fas fa-user-tie ti-md"></i></div>
-        <h5 class="card-title mb-1 pt-2 text-white">Total Absent</h5>
-        <p class="mb-2 mt-1 text-white">6</p>
+        <h5 class="card-title mb-1 pt-2 text-white">JOB POSTING</h5>
+        <p class="mb-2 mt-1 text-white"><?php
+$jobposted="select count(*) as total from core1_recruitment where status='Posted' ";
+$postedquery=mysqli_query($conn,$jobposted);
+$postedrow=mysqli_fetch_assoc($postedquery);
+echo $postedrow['total'];
+?></p>
         <div class="pt-1">
         </div>
       </div>
@@ -111,8 +138,13 @@
     <div class="card">
       <div class="card-body  bg-warning">
         <div class="badge p-2 bg-label-danger mb-2 rounded"><i class="fas fa-user-tie ti-md"></i></div>
-        <h5 class="card-title mb-1 pt-2 text-white">On Leave</h5>
-        <p class="mb-2 mt-1 text-white">6</p>
+        <h5 class="card-title mb-1 pt-2 text-white">NEW  HIRE</h5>
+        <p class="mb-2 mt-1 text-white"><?php
+$hire="select count(*) as total from core1_applicant_apply where status='Qualified' ";
+$hirequery=mysqli_query($conn,$hire);
+$hirerow=mysqli_fetch_assoc($hirequery);
+echo $hirerow['total'];
+?></p>
         <div class="pt-1">
         </div>
       </div>
@@ -139,14 +171,8 @@
 
 <div class="row">
   <div class="col-md-6">
-
-
   </div>
-
    <div class="col-md-6">
-
-      <div id="donut-chart"></div>
- 
   </div>
 </div>
 

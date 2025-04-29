@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\signup;
+use DateTime;
+use DateTimeZone;
+use Illuminate\Database\QueryException;
 
 class signupController extends Controller
 {
@@ -16,11 +19,11 @@ class signupController extends Controller
         }
 
 public function store(Request $request){
-        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-   $random =substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
+    try{
+            $date = new DateTime('now', new DateTimeZone('Asia/Manila'));
+$Date=$date->format('Ymdhis');
         signup::create([
-            'applicant_code' =>$random,
+            'applicant_code' =>$Date,
             'firstname' => $request->first,
             'middlename' => $request->middle,
             'lastname' => $request->last,
@@ -34,13 +37,24 @@ public function store(Request $request){
 $gg=$request->first;
           User::create([
             'name' =>$request->first,
-            'code_id' =>$random,
+            'code_id' =>$Date,
             'password' => $request->password,
             'email' => $request->email,
              'role'=>'applicant',
         ]);
-          return back();
+        
+           return redirect()->back()->with('alert', 'SUCCESS REGISTER');
+
+          } catch (QueryException $e) {
+    if ($e->getCode() == 23000) { // Unique constraint violation
+          return redirect()->back()->with('alert', 'Oops! This email already exists.');
+    }
+}
+
+
   
     }
+
+
 
 }

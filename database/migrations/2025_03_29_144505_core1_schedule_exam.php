@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+      Schema::create('core1_applicant_schedule_exam', function (Blueprint $table) {
+          $table->id('schedule_id');
+          $table->string('applicant_id')->nullable();
+          $table->string('exam_date')->nullable();
+          $table->timestamps();
+  //
+      });
     }
 
     /**

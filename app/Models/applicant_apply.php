@@ -17,6 +17,7 @@ class applicant_apply extends Model
         'recruitment_id',
         'applicant_id',
         'status',
+          'date_hired',
     
         
     ];

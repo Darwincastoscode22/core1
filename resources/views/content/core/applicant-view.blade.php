@@ -11,7 +11,7 @@
 @endsection
 
 @section('page-style')
-  @vite('resources/assets/vendor/scss/pages/app-chat.scss')
+@vite('resources/assets/vendor/scss/pages/app-chat.scss')
 @endsection
 
 @section('vendor-script')
@@ -21,10 +21,10 @@
 @vite('resources/assets/js/app-chat.js')
 @endsection
 @section('content')
-  <div class="">
-    <div class="card">
+<div class="">
+  <div class="card">
 
-          <div style="display:flex;margin-bottom:3%;">
+    <div style="display:flex;margin-bottom:3%;">
       <form class=" mt-3 ml-3 mw-100 navbar-search"  style="margin-left:7px" autocomplete="off">
         <div class="input-group">
           <input type="text"  id="myInput" onkeyup="myFunction()" class="form-control bg-light border-1 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" >
@@ -37,52 +37,102 @@
       </form>
     </div>
 
-      <div class="card-datatable table-responsive">
-        <table class="datatables-projects table border-top">
-          <thead>
-        <tr>
-         <th>Applicant Name</th>
-         <th>Postion</th>
-         <th>Contact Number</th>
-         <th>Email</th>
-         <th>Date Apply</th>
-         <th>Salary</th>
+    <div class="card-datatable table-responsive">
+      <table class="datatables-projects table border-top">
+        <thead>
+          <tr>
+           <th>Applicant Name</th>
+           <th>Postion</th>
+           <th>Contact Number</th>
+           <th>Email</th>
+           <th>Date Apply</th>
+           <th>Salary</th>
            <th>Resume</th>
-                   <th>Job Nature</th>
-        <th>Status</th>
-          <th>Action</th>
+           <th>Job Nature</th>
+           <th>Status</th>
+           <th>Action</th>
+         </tr>
+       </thead>
+       <tbody>
+        @foreach($applicant as $row)
+        <tr class="contents">
+         <td>{{$row->firstname}} {{ $row->lastname}}</td>
+         <td class="titles">{{ $row->jobrole}}</td>
+         <td>{{$row->contact}}</td>
+         <td>{{$row->email}}</td>
+         <td>{{$row->created_at}}</td>
+         <td>{{$row->salary}}</td>
+         <td><button class="btn  btn-sm btn-flat btn-primary"><a href="http://127.0.0.1:8000/assets/img/<?php echo $row->resume;?>" style="color:white;">Download</a></button></td>
+         <td>{{ $row->job_nature}}</td>
+         <td>     <?php if($row->applystatus=='Pending'){?>
+                                   <span class="badge bg-danger">{{$row->applystatus}}</span>
+                               <?php }else if($row->applystatus=='Approved'){?>
+                                  <span class="badge bg-primary">{{$row->applystatus}}</span>
+                              <?php }else if($row->applystatus=='Reject'){?>
+                                  <span class="badge bg-danger">{{$row->applystatus}}</span>
+                              <?php }else if($row->applystatus=='Failed'){?>
+                                  <span class="badge bg-danger">{{$row->applystatus}}</span>
+                              <?php }else{?>
+                               <span class="badge bg-success">{{$row->applystatus}}</span>
+                           <?php }?></td>
+         <td>
+           
+               <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="ti ti-dots-vertical"></i>
+                          </button>
+                          <div class="dropdown-menu">
+
+                              <form method="POST" action="{{route('applicant.reject')}}">
+                                 @csrf
+                                 @method('POST')
+                                 <a class="dropdown-item">
+                                    <input type="text" name="reject_id"  value="{{ $row->applicant_apply_id}}" style="display:none;">
+                                    <button type="submit"  name="submit" class="btn  btn-danger btn-sm btn-flat mb-3" style="font-size:15px;">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </button>
+                                    Failed
+                                </a>
+                            </form>
+                            <form method="POST" action="{{url('applicant.approved')}}">
+                             @csrf
+                             @method('POST')
+                             <a class="dropdown-item">
+                                <input type="text" name="approved_id"  value="{{ $row->applicant_apply_id}}" style="display:none;">
+                                <button class="btn  btn-primary btn-sm btn-flat mb-3" style="font-size:15px;">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </button>
+                                Passed
+                            </a>
+                        </form>
+                        <form method="POST" action="{{route('applicant.hired')}}">
+                         @csrf
+                         @method('POST')
+                         <a class="dropdown-item">
+                            <input type="text" name="hired_id"  value="{{ $row->applicant_apply_id}}" style="display:none;">
+                            <button class="btn  btn-danger btn-sm btn-flat mb-3" style="font-size:15px;">
+                               <i class="fa-solid fa-circle-xmark"></i>
+                           </button>
+                           Reject
+                       </a>
+                   </form>
+               </div>
+           </div>
+
+
+         </td>
+
+
+
        </tr>
-          </thead>
-   <tbody>
-      @foreach($applicant as $row)
-      <tr class="contents">
-       <td>{{$row->firstname}} {{ $row->lastname}}</td>
-       <td class="titles">{{ $row->jobrole}}</td>
-          <td>{{$row->contact}}</td>
-       <td>{{$row->email}}</td>
-      <td>{{$row->created_at}}</td>
-      <td>{{$row->salary}}</td>
-       <td><button class="btn  btn-primary"><a href="http://127.0.0.1:8000/assets/img/<?php echo $row->resume;?>" style="color:white;">Download</a></button></td>
-       <td>{{ $row->job_nature}}</td>
-       <td><span class="text-success">{{$row->applystatus}}</span></td>
-       <td></td>
-<td >
- 
-
-       
-
-</td>
-
-     
-      </tr>
-      @endforeach
-    </tbody>
+       @endforeach
+     </tbody>
 
 
-        </table>
-      </div>
-    </div>
-  </div>
+   </table>
+ </div>
+</div>
+</div>
 
 
 
@@ -97,8 +147,8 @@
 
         </div>
         <div class="modal-body">
-     
-    
+
+
          <label>FIRST NAME</label>
          <div class="form-group">
            <input type="text" name="first" class="form-control">
@@ -109,17 +159,17 @@
            <input type="text" name="middle" class="form-control">
          </div>
 
-           <label>LAST NAME</label>
+         <label>LAST NAME</label>
          <div class="form-group">
            <input type="text" name="last" class="form-control">
          </div>
 
-          <label>EMAIL</label>
+         <label>EMAIL</label>
          <div class="form-group">
            <input type="email" name="email" class="form-control">
          </div>
 
-          <label>CONTACT</label>
+         <label>CONTACT</label>
          <div class="form-group">
            <input type="number" name="contact" class="form-control">
          </div>
@@ -127,14 +177,14 @@
 
          <label>JOB ROLES</label>
          <div class="form-group">
- <select name="role" class="form-control">
-   <option class="form-control">HR STAFF</option>
-  <option class="form-control">TRAINER</option>
-  <option class="form-control">SECRUITY GUARD</option>
-  <option class="form-control">JANITOR</option>
- </select>
+           <select name="role" class="form-control">
+             <option class="form-control">HR STAFF</option>
+             <option class="form-control">TRAINER</option>
+             <option class="form-control">SECRUITY GUARD</option>
+             <option class="form-control">JANITOR</option>
+           </select>
 
-          </div>
+         </div>
 
        </div>
        <div class="modal-footer">

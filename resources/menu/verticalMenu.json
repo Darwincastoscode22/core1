@@ -24,28 +24,51 @@
       "slug": "newhire-view"
     },
       {
-      "url": "user/account",
+      "url": "employee/view",
       "name": "Employee Management",
       "icon": "menu-icon tf-icons ti ti-user ",
-      "slug": "user-account"
-    },
-      {
+      "slug": "employee-view"
+    },{
+      "name": "APPLICANT MANAGEMENT",
+      "icon": "menu-icon tf-icons ti ti-layout-sidebar",
+      "slug": "layouts",
+      "submenu": [
+        {
       "url": "applicant/view",
       "name": "Applicant Management",
       "icon": "menu-icon tf-icons ti ti-user ",
       "slug": "applicant-view"
+    },   {
+      "url": "interview/view",
+      "name": "APPLICANT INTERVIEW",
+      "icon": "menu-icon tf-icons ti ti-clock",
+      "slug": "interview-view"
     },
       {
-      "url": "client/agreement",
+      "url": "schedule/view",
+      "name": "APPLICANT SCHEDULE EXAM",
+      "icon": "menu-icon tf-icons ti ti-clock",
+      "slug": "schedule-view"
+    },
+        {
+      "url": "applicant/exam",
+      "name": "APPLICANT EXAM",
+      "icon": "menu-icon tf-icons ti ti-clock",
+      "slug": "applicant-view"
+    }
+      ]
+    },
+      {
+      "url": "analytics/view",
       "name": "Recruiting Analytics",
       "icon": "menu-icon tf-icons ti ti-user ",
-      "slug": "client-agreement"
+      "slug": "analytics-view"
     },
       {
-      "url": "client/agreement",
+      "url": "reporting/view",
       "name": "Reporting",
       "icon": "menu-icon tf-icons ti ti-user ",
-      "slug": "client-agreement"
+      "slug": "reporting-view"
     }
 
     ,{

@@ -1,4 +1,4 @@
-
+<?php error_reporting(0); ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -60,7 +60,6 @@
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
                                             <li><a href="{{url('/')}}">Home</a></li>
-                                            <li><a href="#findjob">Find a Jobs </a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                         </ul>
@@ -111,29 +110,7 @@
                             </div>
                         </div>
                         <!-- Search Box -->
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <!-- form -->
-                                <form action="#" class="search-box">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Job Tittle or keyword">
-                                    </div>
-                                    <div class="select-form">
-                                        <div class="select-itms">
-                                            <select name="select" id="select1">
-                                                <option value="">Location BD</option>
-                                                <option value="">Location PK</option>
-                                                <option value="">Location US</option>
-                                                <option value="">Location UK</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="search-form">
-                                        <a href="#">Find job</a>
-                                    </div>  
-                                </form> 
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
@@ -473,14 +450,7 @@
 <script type="text/javascript">
     
 $(document).ready(function(){
- $('#job_id').click(function () {
-    $('form')[0].reset();
 
-     var get =$(this).data("id");
-     alert(get);
-       $.cookie("job_id",get);
-     
-  });
 
 });
 

@@ -61,14 +61,14 @@
             <td>
              <?php 
              $status=$emp->status;
-             if($status=='post'){?>
+             if($status=='Posted'){?>
                <span class="badge bg-primary">{{$emp->status}}</span>
              <?php }?>
            </td>
            <td>
             <?php 
             $status=$emp->status;
-            if($status=='post'){?>
+            if($status=='Posted'){?>
             <?php }else{ ?>
               <form  action="{{route('applicant.update')}}" id="formAuthentication" class="mb-3" method="POST">
                 @csrf

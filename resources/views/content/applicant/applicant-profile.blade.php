@@ -38,239 +38,239 @@
 
 
 
-    <!-- Preloader Start -->
+<!-- Preloader Start -->
 
-    <!-- Preloader Start -->
-      <header>
-        <!-- Header Start -->
-       <div class="header-area header-transparrent">
-           <div class="headder-top header-sticky">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class=" col-md-2">
-                            <!-- Logo -->
-                            <div class="logo">
-                                <a href="{{url('/')}}"><img src="assets/img/logo/logo.png" alt=""></a>
-                            </div>  
-                        </div>
-                        <div class=" col-md-9">
-                            <div class="menu-wrapper">
-                                <!-- Main-menu -->
-                                <div class="main-menu">
-                                    <nav class="d-none d-lg-block">
-                                        <ul id="navigation">
-                                            <li><a href="{{url('/')}}">Home</a></li>
-                                            <li><a href="#findjob">Find a Jobs </a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>          
-                                <!-- Header-btn -->
-                                 <div class="header-btn d-none f-right d-lg-block">
-                                 
-                                     <?php   if (Auth::user()) {?>
-                                              <a href="{{url('applicant-profile')}}" class="btn btn-primary">Profile Account</a>
-                                    <a href="{{ route('logout') }}" class="btn btn-primary"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+<!-- Preloader Start -->
+<header>
+  <!-- Header Start -->
+  <div class="header-area header-transparrent">
+   <div class="headder-top header-sticky">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class=" col-md-2">
+          <!-- Logo -->
+          <div class="logo">
+            <a href="{{url('/')}}"><img src="assets/img/logo/logo.png" alt=""></a>
+          </div>  
+        </div>
+        <div class=" col-md-9">
+          <div class="menu-wrapper">
+            <!-- Main-menu -->
+            <div class="main-menu">
+              <nav class="d-none d-lg-block">
+                <ul id="navigation">
+                  <li><a href="{{url('/')}}">Home</a></li>
+                  <li><a href="#findjob">Find a Jobs </a></li>
+                  <li><a href="about.html">About</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>          
+            <!-- Header-btn -->
+            <div class="header-btn d-none f-right d-lg-block">
+             
+             <?php   if (Auth::user()) {?>
+              <a href="{{url('applicant-profile')}}" class="btn btn-primary">Profile Account</a>
+              <a href="{{ route('logout') }}" class="btn btn-primary"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
-                                     <form method="POST" id="logout-form" action="{{ route('logout') }}">
-          @csrf
-        </form>
+              <form method="POST" id="logout-form" action="{{ route('logout') }}">
+                @csrf
+              </form>
 
-                                         <?php } else {?>
-                                  <a href="{{url('signup')}}" class="btn btn-primary">Register</a>
-                                    <a href="#" class="btn btn-primary" id="login">Login</a>
-                              
-                                   <?php  }?>
-                                     </div>
-                            </div>
-                        </div>
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
+            <?php } else {?>
+              <a href="{{url('signup')}}" class="btn btn-primary">Register</a>
+              <a href="#" class="btn btn-primary" id="login">Login</a>
+              
+            <?php  }?>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div class="col-12">
+        <div class="mobile_menu d-block d-lg-none"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Header End -->
+</header>
+
+
+<main>
+
+  <!-- slider Area Start-->
+  
+  <!-- slider Area End-->
+  <div class="container-xxl flex-grow-1 container-p-y">
+
+    <div id="content">
+
+      <?php foreach($profiles as $prof){ ?>
+
+        <section>
+          <div class="container py-5">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="card mb-4">
+                  <div class="card-body text-center">
+                    <img src="{{ asset('assets/img/'.$prof->image) }}" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;height:150px;">
+                    <h5 class="my-3"></h5>
+                    <p class="text-muted mb-1"></p>
+                    <p class="text-muted mb-4"></p>
+                    <div class="d-flex justify-content-center mb-2">
+                      <button type="button" id="open_profile" class="btn btn-primary" style="width:100%;">UPDATE PROFILE</button>
                     </div>
-                </div>
-           </div>
-       </div>
-        <!-- Header End -->
-    </header>
+                    <div class="d-flex justify-content-center mb-2">
+                      <button type="button" data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary" style="width:100%;" id="edit_profile">UPDATE INFO</button>
+                    </div>
 
 
-    <main>
+                    <?php $r=$prof->resume;
+                    if(empty($r)){?>
 
-        <!-- slider Area Start-->
- 
-        <!-- slider Area End-->
-<div class="container-xxl flex-grow-1 container-p-y">
-
-  <div id="content">
-
-    <?php foreach($profiles as $prof){ ?>
-
-      <section>
-        <div class="container py-5">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="{{ asset('assets/img/'.$prof->image) }}" alt="avatar"
-                  class="rounded-circle img-fluid" style="width: 150px;height:150px;">
-                  <h5 class="my-3"></h5>
-                  <p class="text-muted mb-1"></p>
-                  <p class="text-muted mb-4"></p>
-                  <div class="d-flex justify-content-center mb-2">
-                    <button type="button" id="open_profile" class="btn btn-primary" style="width:100%;">UPDATE PROFILE</button>
-                  </div>
-                  <div class="d-flex justify-content-center mb-2">
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary" style="width:100%;" id="edit_profile">UPDATE INFO</button>
-                  </div>
-
-
-                 <?php $r=$prof->resume;
-                     if(empty($r)){?>
-
-                        <div class="d-flex justify-content-center mb-2">
-                 
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary" style="width:100%;" id="open_resume">UPLOAD RESUME</button>
-                  </div>
+                      <div class="d-flex justify-content-center mb-2">
+                       
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary" style="width:100%;" id="open_resume">UPLOAD RESUME</button>
+                      </div>
 
                     <?php }else{?>
-            <div class="d-flex justify-content-center mb-2">
-                    <button type="button" data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary" style="width:100%;" id="open_resume">UPDATE RESUME</button>
+                      <div class="d-flex justify-content-center mb-2">
+                        <button type="button" data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary" style="width:100%;" id="open_resume">UPDATE RESUME</button>
+                      </div>
+                    <?php }
+
+
+                    ?>
+                    
+
+
                   </div>
-                     <?php }
-
-
-                 ?>
-                     
-
-
                 </div>
               </div>
-            </div>
-            <div class="col-lg-8">
-              <div class="card mb-4">
-                <div class="card-body">
-                  <div class="row">
+              <div class="col-lg-8">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <p class="mb-0">Full Name:</p>
+                      </div>
+                      <div class="col-sm-9">
+
+                        <p class="text-muted mb-0">
+
+
+                         <?php echo  $prof->firstname ?>   <?php echo  $prof->middlename ?>   <?php echo  $prof->lastname ?>
+
+                       </p>
+                     </div>
+                   </div>
+                   <hr>
+                   <div class="row ">
                     <div class="col-sm-3">
-                      <p class="mb-0">Full Name:</p>
+                      <p class="mb-0">Gender:</p>
                     </div>
                     <div class="col-sm-9">
-
-                      <p class="text-muted mb-0">
-
-
-                       <?php echo  $prof->firstname ?>   <?php echo  $prof->middlename ?>   <?php echo  $prof->lastname ?>
-
-                     </p>
+                     <p class="text-muted mb-0">{{$prof->gender}}</p>
                    </div>
                  </div>
                  <hr>
-                 <div class="row ">
+
+                 <div class="row">
                   <div class="col-sm-3">
-                    <p class="mb-0">Gender:</p>
+                    <p class="mb-0">Age:</p>
                   </div>
                   <div class="col-sm-9">
-                   <p class="text-muted mb-0">{{$prof->gender}}</p>
-                 </div>
-               </div>
-               <hr>
+                    <p class="text-muted mb-0">{{$prof->age}}</p>
+                  </div>
+                </div>
+                <hr>
 
-               <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Age:</p>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Civil Status:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{$prof->civil_status}}</p>
+                  </div>
                 </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$prof->age}}</p>
+                <hr>
+
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Address:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{$prof->address}}</p>
+                  </div>
                 </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Contact:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{$prof->contact}}</p>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Email:</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{$prof->email}}</p>
+                  </div>
+                </div>
+                <hr>
+
+                
+
+
+                
               </div>
-              <hr>
+            </div>
 
 
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Civil Status:</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$prof->civil_status}}</p>
-                </div>
-              </div>
-              <hr>
 
 
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Address:</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$prof->address}}</p>
-                </div>
-              </div>
-              <hr>
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Contact:</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$prof->contact}}</p>
-                </div>
-              </div>
-              <hr>
+    <div class="modal" tabindex="-1" role="dialog" id="login_modal">
+      <div class="modal-dialog" role="document">
+       <form method="POST"   action="{{route('jobportal.storeImage')}}" enctype="multipart/form-data">
+        @csrf
+        @method('POST')
 
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Email:</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{$prof->email}}</p>
-                </div>
-              </div>
-              <hr>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" style="text-align:center;">UPLOAD PROFILE PICTURE</h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Upload Profile</label>
+              <input  type="file" class="form-control" name="image">
+            </div>
 
-              
+            <input  type="text" class="form-control" name="applicant_id" value="{{$prof->applicant_id}}"style="display:none;">
 
-
-              
+            <div class="modal-footer">
+              <button type="submit" name="submit" class="btn btn-primary">SAVE</button>
+              <button type="button" class="btn btn-danger" id="modal_close">Close</button>
             </div>
           </div>
-
-
-
-
         </div>
-      </div>
+      </form>
     </div>
-  </section>
-
-  <div class="modal" tabindex="-1" role="dialog" id="login_modal">
-    <div class="modal-dialog" role="document">
-     <form method="POST"   action="{{route('jobportal.storeImage')}}" enctype="multipart/form-data">
-      @csrf
-      @method('POST')
-
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-center" style="text-align:center;">UPLOAD PROFILE PICTURE</h5>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Upload Profile</label>
-            <input  type="file" class="form-control" name="image">
-          </div>
-
-          <input  type="text" class="form-control" name="applicant_id" value="{{$prof->applicant_id}}"style="display:none;">
-
-          <div class="modal-footer">
-            <button type="submit" name="submit" class="btn btn-primary">SAVE</button>
-            <button type="button" class="btn btn-danger" id="modal_close">Close</button>
-          </div>
-        </div>
-      </div>
-    </form>
   </div>
-</div>
 
 
 
@@ -393,78 +393,78 @@
 
 </div>
 
-       
-
-    </main>
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-bg footer-padding">
-            <div class="container">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                       <div class="single-footer-caption mb-50">
-                         <div class="single-footer-caption mb-30">
-                             <div class="footer-tittle">
-                                 <h4>About Us</h4>
-                                 <div class="footer-pera">
-                                     <p>Welcome to COMPANY, your one-stop destination for finding the best job opportunities. Whether you're an employer looking for talented candidates or a job seeker searching for your dream job, we've got you covered. Explore a wide range of job listings in various industries and take the next step in your career with us</p>
-                                </div>
-                             </div>
-                         </div>
-
-                       </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Contact Info</h4>
-                                <ul>
-                                    <li>
-                                    <p>Address :Your address goes
-                                        here, your demo address.</p>
-                                    </li>
-                                    <li><a href="#">Phone : +8880 44338899</a></li>
-                                    <li><a href="#">Email : info@colorlib.com</a></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Important Link</h4>
-                                <ul>
-                                    <li><a href="#"> View Project</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                    <li><a href="#">Testimonial</a></li>
-                                    <li><a href="#">Proparties</a></li>
-                                    <li><a href="#">Support</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Newsletter</h4>
-                                <div class="footer-pera footer-pera2">
-                                 <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
-                             </div>
-                             <!-- Form -->
-                        
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               <!--  -->
-               
 
 
-            </div>
+</main>
+<footer>
+  <!-- Footer Start-->
+  <div class="footer-area footer-bg footer-padding">
+    <div class="container">
+      <div class="row d-flex justify-content-between">
+        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+         <div class="single-footer-caption mb-50">
+           <div class="single-footer-caption mb-30">
+             <div class="footer-tittle">
+               <h4>About Us</h4>
+               <div class="footer-pera">
+                 <p>Welcome to COMPANY, your one-stop destination for finding the best job opportunities. Whether you're an employer looking for talented candidates or a job seeker searching for your dream job, we've got you covered. Explore a wide range of job listings in various industries and take the next step in your career with us</p>
+               </div>
+             </div>
+           </div>
+
+         </div>
+       </div>
+       <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+        <div class="single-footer-caption mb-50">
+          <div class="footer-tittle">
+            <h4>Contact Info</h4>
+            <ul>
+              <li>
+                <p>Address :Your address goes
+                here, your demo address.</p>
+              </li>
+              <li><a href="#">Phone : +8880 44338899</a></li>
+              <li><a href="#">Email : info@colorlib.com</a></li>
+            </ul>
+          </div>
+
         </div>
-  
-    </footer>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+        <div class="single-footer-caption mb-50">
+          <div class="footer-tittle">
+            <h4>Important Link</h4>
+            <ul>
+              <li><a href="#"> View Project</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Testimonial</a></li>
+              <li><a href="#">Proparties</a></li>
+              <li><a href="#">Support</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+        <div class="single-footer-caption mb-50">
+          <div class="footer-tittle">
+            <h4>Newsletter</h4>
+            <div class="footer-pera footer-pera2">
+             <p>Heaven fruitful doesn't over lesser in days. Appear creeping.</p>
+           </div>
+           <!-- Form -->
+           
+         </div>
+       </div>
+     </div>
+   </div>
+   <!--  -->
+   
+
+
+ </div>
+</div>
+
+</footer>
 
 
 
@@ -510,7 +510,7 @@
 <!-- jQuery Plugins, main jQuery -->
 <script src="{{ asset('js/plugins.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 @endsection
 
 
